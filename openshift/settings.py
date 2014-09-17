@@ -28,7 +28,10 @@ if 'OPENSHIFT_REPO_DIR' in os.environ:
 SECRET_KEY = use_keys['SECRET_KEY']
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+if 'OPENSHIFT_REPO_DIR' in os.environ:
+    DEBUG = False
+else:
+    DEBUG = True
 
 TEMPLATE_DEBUG = True
 
