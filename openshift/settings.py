@@ -18,7 +18,14 @@ BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 # See https://docs.djangoproject.com/en/1.6/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = ''
+default_keys = { 'SECRET_KEY': 'vm4rl5*ymb@2&d_(gc$gb-^twq9w(u69hi--%$5xrh!xk(t%hw' }
+use_keys = default_keys
+if 'OPENSHIFT_REPO_DIR' in os.environ:
+     imp.find_module('openshiftlibs')
+     import openshiftlibs
+     use_keys = openshiftlibs.openshift_secure(default_keys)
+
+SECRET_KEY = use_keys['SECRET_KEY']
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -37,7 +44,6 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'canvas',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -49,9 +55,9 @@ MIDDLEWARE_CLASSES = (
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 )
 
-ROOT_URLCONF = 'bep.urls'
+ROOT_URLCONF = 'openshift.urls'
 
-WSGI_APPLICATION = 'bep.wsgi.application'
+WSGI_APPLICATION = 'openshift.wsgi.application'
 
 
 # Database
