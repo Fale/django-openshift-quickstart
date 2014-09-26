@@ -3,8 +3,8 @@
 ## Development
 If you would like to develop something ontop of this you will only have to:
 
-    * Add the application folder in the root
-    * Mention the application in the `INSTALLED_APPS` array in the `openshift/settings.py` file
+* Add the application folder in the root
+* Mention the application in the `INSTALLED_APPS` array in the `openshift/settings.py` file
 
 You are now ready to deploy.
 
